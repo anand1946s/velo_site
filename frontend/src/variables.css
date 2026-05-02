@@ -1,0 +1,9 @@
+:root {
+	--color-text: #f7f2ff;
+	--color-muted: #d7c7f7;
+	--color-border: rgba(219, 191, 255, 0.16);
+	--color-surface: rgba(28, 14, 53, 0.82);
+	--color-bg: radial-gradient(circle at top, rgba(168, 85, 247, 0.22), transparent 30%), radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.18), transparent 26%), linear-gradient(180deg, #15091f 0%, #10081b 42%, #09040f 100%);
+	--color-accent: #b46cff;
+	--color-accent-soft: rgba(180, 108, 255, 0.18);
+}
