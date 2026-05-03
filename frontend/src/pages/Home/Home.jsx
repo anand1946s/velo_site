@@ -2,69 +2,35 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import Hero from "../../components/Hero/Hero.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
+import SubsystemCard from "./SubsystemCard.jsx";
 import "./Home.css";
-
-function createSubsystemArt({ title, accentA, accentB, label }) {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="${title}">
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${accentA}" />
-          <stop offset="100%" stop-color="${accentB}" />
-        </linearGradient>
-        <radialGradient id="glow" cx="50%" cy="50%" r="60%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.24" />
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="1200" height="800" rx="44" fill="url(#bg)" />
-      <circle cx="880" cy="210" r="260" fill="url(#glow)" />
-      <path d="M60 650 C240 560, 320 560, 460 650 S770 760, 1140 590" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="20" stroke-linecap="round" />
-      <path d="M110 250 C330 110, 580 110, 820 250 S1050 370, 1160 260" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="14" stroke-linecap="round" />
-      <text x="84" y="118" fill="rgba(255,255,255,0.9)" font-family="Arial, sans-serif" font-size="54" font-weight="700" letter-spacing="6">VELOCET</text>
-      <text x="84" y="680" fill="rgba(255,255,255,0.94)" font-family="Arial, sans-serif" font-size="112" font-weight="800">${title}</text>
-      <text x="86" y="736" fill="rgba(255,255,255,0.78)" font-family="Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="3">${label}</text>
-      <rect x="84" y="162" width="260" height="58" rx="29" fill="rgba(255,255,255,0.16)" />
-      <text x="114" y="202" fill="white" font-family="Arial, sans-serif" font-size="32" font-weight="700">Subsystem</text>
-    </svg>
-  `;
-
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
 
 const subsystemSlides = [
   {
     title: "Propulsion",
     label: "Thrust and launch energy",
     description: "Engine design, recovery dynamics, and controlled flight performance.",
-    accentA: "#7c3aed",
-    accentB: "#1d4ed8",
+    note: "High-energy stages, ignition timing, and launch optimization.",
   },
   {
     title: "Structure",
     label: "Frames, fins, and airframe integrity",
     description: "Load paths, material strength, and aerodynamic stability under stress.",
-    accentA: "#0f766e",
-    accentB: "#2563eb",
+    note: "Lightweight shells, rigidity, and structural resilience.",
   },
   {
     title: "Avionics",
     label: "Telemetry and onboard control",
     description: "Flight computers, sensors, data logging, and mission sequencing.",
-    accentA: "#ea580c",
-    accentB: "#db2777",
+    note: "Guidance logic, flight data, and mission electronics.",
   },
   {
     title: "Payload",
     label: "Experiments and mission cargo",
     description: "Scientific packages, modular bays, and deployment systems.",
-    accentA: "#0f172a",
-    accentB: "#4f46e5",
+    note: "Mission tools, test payloads, and deployable modules.",
   },
-].map((slide) => ({
-  ...slide,
-  image: createSubsystemArt(slide),
-}));
+];
 
 function Home() {
   const missionRef = useRef(null);
@@ -163,14 +129,7 @@ function Home() {
 
         <div className="subsystem-slider" ref={subsystemSliderRef} aria-label="Subsystem image slider">
           {subsystemSlides.map((slide) => (
-            <article className="subsystem-slide" key={slide.title}>
-              <img className="subsystem-slide-image" src={slide.image} alt={`${slide.title} subsystem artwork`} />
-              <div className="subsystem-slide-copy">
-                <p className="subsystem-slide-label">{slide.title}</p>
-                <h3>{slide.label}</h3>
-                <p>{slide.description}</p>
-              </div>
-            </article>
+            <SubsystemCard key={slide.title} slide={slide} />
           ))}
         </div>
       </section>
